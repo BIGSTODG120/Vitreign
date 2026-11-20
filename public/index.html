@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101111">
+  <meta name="description" content="Vitreign is a self-hosted photo and video gallery for Immich.">
+  <title>Vitreign — Photo &amp; Video Library</title>
+  <link rel="icon" href="/brand.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to library</a>
+  <section id="airlock" class="airlock" aria-labelledby="airlock-title">
+    <div class="airlock-stage">
+      <div class="airlock-art" aria-hidden="true">
+        <img class="airlock-open" width="1254" height="624" src="/media/hatch-open.webp" alt="">
+        <img class="airlock-door" width="1254" height="624" src="/media/hatch-closed.webp" alt="" fetchpriority="high">
+      </div>
+      <div class="airlock-wordmark"><img src="/brand.svg" alt="" width="34" height="34">Vitreign</div>
+      <div class="airlock-copy">
+        <h1 id="airlock-title">THE ARCHIVE<br><em>OPENS.</em></h1>
+      </div>
+      <p class="airlock-reveal" aria-hidden="true">Your library.<br>On your terms.</p>
+      <div class="airlock-entry">
+        <a href="#workspace-shell" id="enter-library" class="accent-button">Open library</a>
+        <p>Scroll to open the hatch</p>
+      </div>
+      <div class="airlock-progress" aria-hidden="true"></div>
+    </div>
+  </section>
+  <div class="shell" id="workspace-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/" aria-label="Vitreign home">
+        <img width="37" height="37" src="/brand.svg" alt="">
+        <span>Vitreign<small>PHOTO LIBRARY</small></span>
+      </a>
+      <nav class="side-nav" aria-label="Library navigation">
+        <p class="nav-label">WORKSPACE</p>
+        <button type="button" data-view="library" aria-current="page"><svg aria-hidden="true"><use href="/icons.svg#gallery"></use></svg>Library</button>
+        <button type="button" data-view="favorites"><svg aria-hidden="true"><use href="/icons.svg#heart"></use></svg>Favorites</button>
+        <button type="button" data-view="reels"><svg aria-hidden="true"><use href="/icons.svg#reels"></use></svg>Reels</button>
+        <button type="button" data-view="albums" hidden><svg aria-hidden="true"><use href="/icons.svg#album"></use></svg>Immich albums</button>
+        <button type="button" data-view="archive"><svg aria-hidden="true"><use href="/icons.svg#server"></use></svg>Archive</button>
+        <button type="button" data-view="restore"><svg aria-hidden="true"><use href="/icons.svg#verify"></use></svg>Restore Check</button>
+      </nav>
+      <div class="sidebar-foot">
+        <button id="source-button" class="source-button" type="button">
+          <span class="source-icon"><svg aria-hidden="true"><use href="/icons.svg#server"></use></svg></span>
+          <span><strong id="source-title">Sample library</strong><small id="source-detail">On this device</small></span>
+          <svg class="source-chevron" aria-hidden="true"><use href="/icons.svg#right"></use></svg>
+        </button>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <button id="mobile-menu" class="icon-button mobile-menu" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"><svg aria-hidden="true"><use href="/icons.svg#menu"></use></svg></button>
+        <div class="breadcrumbs"><span>Workspace</span><svg aria-hidden="true"><use href="/icons.svg#right"></use></svg><strong id="breadcrumb">Library</strong></div>
+        <form role="search" id="search" class="search">
+          <svg aria-hidden="true"><use href="/icons.svg#search"></use></svg>
+          <input id="query" type="search" maxlength="120" placeholder="Search photos and videos" aria-label="Search photos and videos" autocomplete="off">
+          <kbd aria-hidden="true">/</kbd>
+        </form>
+        <button id="lock" class="icon-button" aria-label="Lock library" type="button" hidden><svg aria-hidden="true"><use href="/icons.svg#lock"></use></svg></button>
+        <button id="open-commands" class="outline-button command-trigger" type="button" aria-label="Open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <svg aria-hidden="true"><use href="/icons.svg#command"></use></svg><span>Commands</span><kbd aria-hidden="true">Ctrl K</kbd>
+        </button>
+        <button id="top-source" class="top-source" type="button"><span></span><strong id="top-source-label">Sample mode</strong></button>
+      </header>
+      <main id="content" tabindex="-1">
+        <section id="locked" class="locked-panel" hidden aria-labelledby="unlock-title">
+          <img src="/brand.svg" alt="" width="60" height="60">
+          <h1 id="unlock-title">Unlock your library.</h1>
+          <p>Enter this workspace’s access key to open the gallery.</p>
+          <form id="login" class="login-form">
+            <label for="key">Workspace access key</label>
+            <input id="key" type="password" name="key" maxlength="64" autocomplete="current-password" required>
+            <button class="accent-button" type="submit">Unlock library</button>
+            <p id="login-error" role="alert"></p>
+          </form>
+        </section>
+        <div id="library-ui">
+          <section class="hero" id="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+              <p class="eyebrow"><span></span><span id="hero-eyebrow">CINEMA VIEW</span></p>
+              <h1 id="hero-title">Your library,<br><em>in motion.</em></h1>
+              <p id="hero-description">A closer look at the photos and films you keep.</p>
+            </div>
+            <div class="stage-wrap" role="region" aria-label="Featured media carousel">
+              <div class="stage" id="carousel" aria-label="Browse featured media"></div>
+            </div>
+            <div class="transport">
+              <button id="prev-frame" class="icon-button transport-button" type="button" aria-label="Previous carousel item"><svg aria-hidden="true"><use href="/icons.svg#left"></use></svg></button>
+              <div class="frame-label">
+                <strong id="frame-title"></strong>
+                <span id="frame-counter" aria-live="polite"></span>
+              </div>
+              <button id="next-frame" class="icon-button transport-button" type="button" aria-label="Next carousel item"><svg aria-hidden="true"><use href="/icons.svg#right"></use></svg></button>
+            </div>
+          </section>
+          <section class="library" id="library" aria-labelledby="library-title">
+            <div class="library-head">
+              <div class="library-title">
+                <button id="back" type="button" class="text-button" hidden><svg aria-hidden="true"><use href="/icons.svg#left"></use></svg><span></span></button>
+                <h2 id="library-title">All media</h2>
+                <p id="library-count" role="status"></p>
+              </div>
+              <div class="library-actions">
+                <button id="reel-play" type="button" class="accent-button" hidden><svg aria-hidden="true"><use href="/icons.svg#play"></use></svg>Play reel</button>
+                <button id="reel-order" type="button" class="outline-button" hidden aria-pressed="false">Reorder</button>
+                <a id="reel-index" class="outline-button" hidden download>Export index</a>
+                <button id="new-reel" type="button" class="accent-button" hidden><svg aria-hidden="true"><use href="/icons.svg#plus"></use></svg> New reel</button>
+                <button id="remove-reel" type="button" class="icon-button" aria-label="Delete reel" hidden><svg aria-hidden="true"><use href="/icons.svg#trash"></use></svg></button>
+                <button id="date-filter" type="button" class="outline-button"><svg aria-hidden="true"><use href="/icons.svg#calendar"></use></svg>Dates</button>
+                <div class="filters" role="group" aria-label="Filter by media type">
+                  <button type="button" data-kind="" aria-pressed="true">All</button>
+                  <button type="button" data-kind="photo" aria-pressed="false">Photos</button>
+                  <button type="button" data-kind="video" aria-pressed="false">Videos</button>
+                </div>
+              </div>
+            </div>
+            <div id="notice" class="notice" hidden><p id="notice-message" role="status"></p><button class="outline-button" id="retry" type="button" hidden>Try again</button></div>
+            <div id="grid" class="grid"></div>
+            <button id="more" type="button" class="outline-button more" hidden>Load more</button>
+          </section>
+          <section id="archive" class="library archive" aria-labelledby="archive-title" hidden>
+            <div class="library-head">
+              <div class="library-title"><h2 id="archive-title">Archive</h2><p>Capacity and reachability for the storage configured on this host.</p></div>
+              <button id="storage-refresh" type="button" class="outline-button">Refresh</button>
+            </div>
+            <p id="storage-status" class="archive-status" role="status"></p>
+            <div id="storage-grid" class="storage-grid"></div>
+            <div class="archive-help">
+              <h3>Verify a restored file</h3>
+              <p>Choose an original and its restored copy. Vitreign compares them byte for byte on this device.</p>
+              <button type="button" id="open-restore" class="outline-button">Open Restore Check</button>
+            </div>
+            <div class="archive-help">
+              <h3>Connect a disk or NAS</h3>
+              <p>Mount the storage on your host, add its path to <code>VITREIGN_STORAGE_ROOTS</code>, and restart Vitreign. Add the media directory in Immich as a read-only external library.</p>
+              <a class="outline-button" href="https://docs.immich.app/guides/external-library/" target="_blank" rel="noreferrer">Immich storage setup</a>
+            </div>
+          </section>
+          <section class="library restore" id="restore" aria-labelledby="restore-title" hidden>
+            <div class="restore-intro">
+              <h2 id="restore-title" tabindex="-1">Restore Check</h2>
+              <p>Pick an original and a restored copy from separate locations. Vitreign checks the two files in your browser.</p>
+            </div>
+            <div class="restore-files">
+              <div class="restore-file">
+                <label for="restore-source">Original file</label>
+                <input type="file" id="restore-source">
+              </div>
+              <div class="restore-file">
+                <label for="restore-copy">Restored copy</label>
+                <input type="file" id="restore-copy">
+              </div>
+            </div>
+            <div class="restore-actions">
+              <button type="button" class="accent-button" id="restore-start" disabled>Compare files</button>
+              <button type="button" class="outline-button" id="restore-cancel" hidden>Cancel check</button>
+            </div>
+            <div class="restore-meter" id="restore-meter" hidden>
+              <progress id="restore-progress" max="100" value="0" aria-label="File comparison progress"></progress>
+            </div>
+            <div class="restore-answer" role="status">
+              <h3 id="restore-result"></h3>
+              <p id="restore-detail"></p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="viewer" class="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-head">
+      <div><h2 id="viewer-title"></h2><p id="viewer-meta"></p></div>
+      <button type="button" class="icon-button" data-close aria-label="Close viewer" autofocus><svg aria-hidden="true"><use href="/icons.svg#close"></use></svg></button>
+    </div>
+    <div id="viewer-media" class="viewer-media"></div>
+    <div class="viewer-actions">
+      <div class="viewer-nav">
+        <button id="viewer-prev" type="button" class="icon-button" aria-label="Previous media"><svg aria-hidden="true"><use href="/icons.svg#left"></use></svg></button>
+        <button id="viewer-next" type="button" class="icon-button" aria-label="Next media"><svg aria-hidden="true"><use href="/icons.svg#right"></use></svg></button>
+      </div>
+      <button type="button" id="favorite" class="outline-button"><svg aria-hidden="true"><use href="/icons.svg#heart"></use></svg><span>Favorite</span></button>
+      <button type="button" id="add-frame" class="outline-button"><svg aria-hidden="true"><use href="/icons.svg#reels"></use></svg>Reels</button>
+      <button type="button" id="share" class="outline-button"><svg aria-hidden="true"><use href="/icons.svg#link"></use></svg><span>Share</span></button>
+      <a id="original" class="outline-button" download hidden><svg aria-hidden="true"><use href="/icons.svg#download"></use></svg>Original</a>
+    </div>
+  </dialog>
+
+  <dialog id="panel" class="panel" aria-labelledby="panel-title">
+    <div class="panel-head"><h2 id="panel-title"></h2><button type="button" class="icon-button" data-close aria-label="Close dialog"><svg aria-hidden="true"><use href="/icons.svg#close"></use></svg></button></div>
+    <div id="panel-content"></div>
+  </dialog>
+  <dialog id="commands" class="command-dialog" aria-labelledby="command-title">
+    <div class="panel-head">
+      <h2 id="command-title">Commands</h2>
+      <button type="button" class="icon-button" data-close aria-label="Close command palette"><svg aria-hidden="true"><use href="/icons.svg#close"></use></svg></button>
+    </div>
+    <div class="command-body">
+      <input id="command-query" type="search" role="combobox" aria-label="Find a command or search the library"
+        aria-controls="command-results" aria-expanded="false" aria-autocomplete="list" autocomplete="off"
+        placeholder="Find a command or search the library" maxlength="120" autofocus>
+      <div id="command-results" role="listbox" aria-label="Commands"></div>
+      <p class="command-help">Use arrow keys and Enter to open a command.</p>
+    </div>
+  </dialog>
+  <dialog id="screening" class="viewer screening" aria-labelledby="screen-title">
+    <div class="viewer-head">
+      <div><h2 id="screen-title"></h2><p id="screen-caption" role="status"></p></div>
+      <button type="button" class="icon-button" data-close aria-label="Close screening" autofocus><svg aria-hidden="true"><use href="/icons.svg#close"></use></svg></button>
+    </div>
+    <div class="viewer-media" id="screen-media"></div>
+    <p class="screen-cue" id="screen-cue" hidden></p>
+    <div class="viewer-actions">
+      <div class="viewer-nav">
+        <button type="button" class="icon-button" id="screen-prev" aria-label="Previous reel frame"><svg aria-hidden="true"><use href="/icons.svg#left"></use></svg></button>
+        <button type="button" class="icon-button" id="screen-next" aria-label="Next reel frame"><svg aria-hidden="true"><use href="/icons.svg#right"></use></svg></button>
+      </div>
+      <button type="button" class="outline-button" id="screen-audio" hidden>Unmute</button>
+      <button type="button" class="accent-button" id="screen-toggle">Pause</button>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

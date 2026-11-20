@@ -1,0 +1,14 @@
+{
+  "name": "vitreign",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "description": "A self-hosted photo and video gallery for Immich.",
+  "type": "module",
+  "engines": { "node": ">=24.16.0" },
+  "scripts": {
+    "dev": "node src/start.mjs",
+    "launch": "node src/start.mjs --launch",
+    "start": "node src/start.mjs",
+    "check": "node --test test/server.test.mjs"
+  }
+}

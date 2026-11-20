@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get started with Vitreign</title>
+  <link rel="icon" href="/brand.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/setup.js"></script>
+</head>
+<body class="setup-page">
+  <main class="setup-shell">
+    <div class="setup-art" aria-hidden="true"></div>
+    <div class="setup-content">
+      <div class="setup-brand"><img src="/brand.svg" alt="" width="34" height="34"><span>Vitreign</span></div>
+      <h1>Open your archive.</h1>
+      <p class="setup-intro">Take a look around first, or connect the Immich library you already use.</p>
+      <div id="setup-controls" hidden>
+        <button type="button" id="try-library" class="outline-button">Try the sample library</button>
+        <form id="setup-form" autocomplete="off">
+          <h2>Connect Immich</h2>
+          <p>In Immich, go to <strong>Account Settings → API Keys</strong>. Create a key with <code>asset.read</code>, <code>asset.view</code>, and <code>album.read</code>.</p>
+          <label for="setup-url">Immich address</label>
+          <input id="setup-url" type="url" inputmode="url" maxlength="512" value="http://127.0.0.1:2283" required>
+          <p class="setup-help">Use the address you normally open for Immich. For a server on another device, use HTTPS where possible.</p>
+          <label for="setup-key">Immich API key</label>
+          <input id="setup-key" type="password" maxlength="200" autocomplete="off" spellcheck="false" required>
+          <div class="setup-actions">
+            <button type="submit" id="connect-library" class="accent-button">Check and connect</button>
+            <a id="open-immich" target="_blank" rel="noreferrer" hidden>Open Immich</a>
+            <a href="https://docs.immich.app/install/docker-compose/" target="_blank" rel="noreferrer">Install Immich</a>
+          </div>
+        </form>
+      </div>
+      <section id="setup-ready" hidden aria-labelledby="setup-ready-title">
+        <h2 id="setup-ready-title" tabindex="-1">Your gallery is ready.</h2>
+        <p id="setup-summary"></p>
+        <div id="workspace-secret" hidden>
+          <label for="setup-workspace-key">Workspace key for future sign-ins</label>
+          <input id="setup-workspace-key" type="text" readonly spellcheck="false" autocomplete="off">
+          <button id="copy-workspace-key" type="button" class="outline-button">Copy workspace key</button>
+        </div>
+        <a id="open-gallery" class="accent-button">Open the gallery</a>
+      </section>
+      <p class="setup-status" id="setup-status" role="status"></p>
+    </div>
+  </main>
+</body>
+</html>
