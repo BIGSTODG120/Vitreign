@@ -1,8 +1,21 @@
-# Vitreign
+# <img src="public/brand.svg" width="40" height="40" alt=""> Vitreign
 
-Find the photo you’d go back for. See it again. Make sure you can get it back.
+**A photo library with a spacecraft hatch.**
 
-Vitreign is a self-hosted photo and video workspace for Immich. Open the airlock, browse in 3D, and give a reel its own sequence, captions, and pacing. Archive shows the storage available to your host. Restore Check compares a chosen original and restored copy byte for byte in your browser. You can explore the included sample library offline.
+Scroll through the airlock and spin through the photos and videos you keep in Immich. Turn a day’s footage into a reel with your own sequence, captions, and pacing.
+
+![Vitreign’s Cinema View showing the 3D photo and video carousel, with a coastal clip in focus between mountain and forest photos](docs/media/vitreign-cinema.webp)
+
+<details>
+<summary>Watch the photo carousel in motion</summary>
+
+![The carousel rotates through a coastal clip, snowy peaks, and desert dunes in Vitreign’s included sample library](docs/media/vitreign-carousel.webp)
+
+</details>
+
+Keep your originals on the drive or NAS your Immich server already uses. Open **Archive** to check configured storage and **Restore Check** to compare an original and a restored copy byte for byte in your browser.
+
+[Download Vitreign](https://github.com/BIGSTODG120/Vitreign/releases/download/launch/Vitreign-source.zip) · [Launch the sample library offline](#open-vitreign) · [Set up a drive or NAS](docs/storage.md)
 
 ## Open Vitreign
 
